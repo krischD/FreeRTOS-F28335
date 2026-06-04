@@ -1,0 +1,8 @@
+# CCS build output
+Free_RTOS/Debug/
+
+# Eclipse workspace metadata
+.metadata/
+RemoteSystemsTempFiles/
+dvt/
+.jxbrowser.userdata/
