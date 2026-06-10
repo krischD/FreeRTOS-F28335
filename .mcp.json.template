@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "ccs": {
+      "command": "<YOUR_PYTHON_PATH>",
+      "args": ["<PATH_TO_CLONE>/ccs-mcp/server.py"],
+      "env": {
+        "CCS_ECLIPSEC": "<CCS_PATH>/ccs/eclipse/eclipsec.exe",
+        "CCS_WORKSPACE": "<YOUR_WORKSPACE_PATH>",
+        "CCS_DEFAULT_PROJECT": "<YOUR_PROJECT_NAME>"
+      }
+    },
+    "ccs-debug": {
+      "command": "<YOUR_PYTHON_PATH>",
+      "args": ["<PATH_TO_CLONE>/ccs-mcp/server_debug.py"],
+      "env": {
+        "CCS_DSS": "<CCS_PATH>/ccs/ccs_base/scripting/bin/dss.bat",
+        "CCS_CCXML": "<PATH_TO_PROJECT>/targetConfigs/TMS320F28335.ccxml",
+        "CCS_TARGET_OUT": "<PATH_TO_PROJECT>/Debug/<PROJECT_NAME>.out",
+        "CCS_DSS_TIMEOUT": "120"
+      }
+    }
+  }
+}

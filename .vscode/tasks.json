@@ -1,0 +1,160 @@
+// 注意：eclipsec.exe 和 dss.bat 的路径需根据你的 CCS 安装位置修改。
+// 默认指向 d:/ti/ccs1240/，安装在其他位置的请全局替换。
+
+{
+    "version": "2.0.0",
+    "options": {
+        "shell": {
+            "executable": "cmd.exe",
+            "args": ["/c"]
+        }
+    },
+    "tasks": [
+        // ════════════════════════════════════════════════════════════
+        // 构建
+        // ════════════════════════════════════════════════════════════
+        {
+            "label": "CCS: 增量构建",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/eclipse/eclipsec.exe",
+            "args": [
+                "-noSplash",
+                "-data", "d:/DSP/DSP28335",
+                "-application", "com.ti.ccstudio.apps.projectBuild",
+                "-ccs.projects", "Free_RTOS",
+                "-ccs.configuration", "Debug",
+                "-ccs.buildType", "incremental",
+                "-ccs.listProblems"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CCS: 全量构建",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/eclipse/eclipsec.exe",
+            "args": [
+                "-noSplash",
+                "-data", "d:/DSP/DSP28335",
+                "-application", "com.ti.ccstudio.apps.projectBuild",
+                "-ccs.projects", "Free_RTOS",
+                "-ccs.configuration", "Debug",
+                "-ccs.buildType", "full",
+                "-ccs.listProblems"
+            ],
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CCS: 清理",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/eclipse/eclipsec.exe",
+            "args": [
+                "-noSplash",
+                "-data", "d:/DSP/DSP28335",
+                "-application", "com.ti.ccstudio.apps.projectBuild",
+                "-ccs.projects", "Free_RTOS",
+                "-ccs.configuration", "Debug",
+                "-ccs.buildType", "clean"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+
+        // ════════════════════════════════════════════════════════════
+        // 烧录
+        // ════════════════════════════════════════════════════════════
+        {
+            "label": "CCS: 烧录并运行",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/ccs_base/scripting/bin/dss.bat",
+            "args": [
+                "d:/ti/ccs-mcp/dss_flash.js",
+                "d:/DSP/DSP28335/Free_RTOS/targetConfigs/TMS320F28335.ccxml",
+                "d:/DSP/DSP28335/Free_RTOS/Debug/Free_RTOS.out",
+                "run"
+            ],
+            "dependsOn": ["CCS: 增量构建"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CCS: 烧录并暂停（调试入口）",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/ccs_base/scripting/bin/dss.bat",
+            "args": [
+                "d:/ti/ccs-mcp/dss_flash.js",
+                "d:/DSP/DSP28335/Free_RTOS/targetConfigs/TMS320F28335.ccxml",
+                "d:/DSP/DSP28335/Free_RTOS/Debug/Free_RTOS.out",
+                "halt"
+            ],
+            "dependsOn": ["CCS: 增量构建"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CCS: 仅烧录（不构建）",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/ccs_base/scripting/bin/dss.bat",
+            "args": [
+                "d:/ti/ccs-mcp/dss_flash.js",
+                "d:/DSP/DSP28335/Free_RTOS/targetConfigs/TMS320F28335.ccxml",
+                "d:/DSP/DSP28335/Free_RTOS/Debug/Free_RTOS.out",
+                "run"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+
+        // ════════════════════════════════════════════════════════════
+        // 快捷组合
+        // ════════════════════════════════════════════════════════════
+        {
+            "label": "CCS: 全量构建 + 烧录运行",
+            "type": "shell",
+            "command": "d:/ti/ccs1240/ccs/ccs_base/scripting/bin/dss.bat",
+            "args": [
+                "d:/ti/ccs-mcp/dss_flash.js",
+                "d:/DSP/DSP28335/Free_RTOS/targetConfigs/TMS320F28335.ccxml",
+                "d:/DSP/DSP28335/Free_RTOS/Debug/Free_RTOS.out",
+                "run"
+            ],
+            "dependsOn": ["CCS: 全量构建"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "dedicated",
+                "clear": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

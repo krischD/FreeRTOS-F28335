@@ -1,0 +1,39 @@
+# CCS build output
+Free_RTOS/Debug/
+
+# MCP 配置（含本机路径，用 .mcp.json.template 模板创建你自己的）
+.mcp.json
+
+# Eclipse workspace metadata
+.metadata/
+RemoteSystemsTempFiles/
+dvt/
+.jxbrowser.userdata/
+
+# ══════════════════════════════════════════════════════════════════════
+# 版本适配说明（给 clone 本工程的人）
+# ══════════════════════════════════════════════════════════════════════
+#
+# 本工程为 CCS 12.4.0 + 编译器 22.6.0.LTS 配置。
+# 如果你的 CCS/编译器版本不同，编译时会出现类似警告：
+#
+#   [project]: This project was created with a newer version of
+#   Code Composer Studio - v12.x.0.
+#
+#   [properties]: This project was created using a version of compiler
+#   that is not currently installed - 22.6.x.LTS [C2000].
+#
+# 消除方法 — 修改两个文件中的版本号：
+#
+# 1. Free_RTOS/.ccsproject:
+#    <ccsVersion value="12.X.0"/>           → 改为你的 CCS 版本
+#    <codegenToolVersion value="22.6.X.LTS"/> → 改为你安装的编译器版本
+#
+# 2. Free_RTOS/.cproject:
+#    搜索 "22.6.0.LTS" → 改为你安装的编译器版本
+#    搜索 "CCS_MBS_VERSION=6.1.0" → 改为对应 MBS 版本
+#
+#    CCS 版本与 MBS 版本对应关系（可查 CCS 帮助文档确认）：
+#      CCS 12.4.0 → MBS 6.1.0
+#      CCS 12.6.0 → MBS 6.1.3
+# ══════════════════════════════════════════════════════════════════════
